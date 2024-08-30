@@ -10,22 +10,19 @@ export default function Footer() {
         </div>
 
         <div>
-          <a href='' className='me-4 text-reset'>
+          <a href='https://www.facebook.com/Estub-Meti' className='me-4 text-reset'>
             <MDBIcon fab icon="facebook-f" />
           </a>
           <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="twitter" />
+            <MDBIcon fab icon="telegram" />
           </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="google" />
-          </a>
-          <a href='' className='me-4 text-reset'>
+          <a href='https://www.instagram.com/bia_me19/' className='me-4 text-reset'>
             <MDBIcon fab icon="instagram" />
           </a>
-          <a href='' className='me-4 text-reset'>
+          <a href='https://www.linkedin.com/in/metasebia-tariku-552308214' className='me-4 text-reset'>
             <MDBIcon fab icon="linkedin" />
           </a>
-          <a href='' className='me-4 text-reset'>
+          <a href='https://github.com/Meti23' className='me-4 text-reset'>
             <MDBIcon fab icon="github" />
           </a>
         </div>

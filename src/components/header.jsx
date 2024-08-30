@@ -3,15 +3,27 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import AdbIcon from '@mui/icons-material/Adb';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import SecureFinLogo from '../assets/SecureFin.png'; // Import the image
 
 function Header() {
   return (
     <AppBar position="static">
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* Image for larger screens */}
+          <img
+            src={SecureFinLogo}
+            alt="SecureFin Logo"
+            style={{
+              display: { xs: 'none', md: 'flex' },
+              width: '50px',
+              height: 'auto',
+              marginRight: '8px',
+            }}
+            className="logo-md"
+          />
           <Typography
             variant="h6"
             noWrap
@@ -26,9 +38,21 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            SecureFin
           </Typography>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          
+          {/* Image for smaller screens */}
+          <img
+            src={SecureFinLogo}
+            alt="SecureFin Logo"
+            style={{
+              display: { xs: 'flex', md: 'none' },
+              width: '40px',
+              height: 'auto',
+              marginRight: '8px',
+            }}
+            className="logo-xs"
+          />
           <Typography
             variant="h5"
             noWrap
@@ -44,11 +68,11 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            SecureFin
           </Typography>
         </Box>
-        <Button color="inherit">
-          Login
+        <Button color="inherit" component={Link} to="/signup">
+          Register
         </Button>
       </Toolbar>
     </AppBar>

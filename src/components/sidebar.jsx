@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { Menu, Switch } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { Menu } from 'antd';
+import { Link } from 'react-router-dom';
 
 const items = [
+  {
+    key: 'sub2',
+    label: 'Dashboard',
+    icon: <AppstoreOutlined />,
+    path: '/dashboard',
+  },
   {
     key: 'sub1',
     label: 'Budget Planner',
@@ -33,13 +39,8 @@ const items = [
     children: [
       {
         key: 'report',
-        label: 'Statistics',
+        label: 'Yearly Report',
         path: '/statistics',
-      },
-      {
-        key: 'Analysis',
-        label: 'Analysis and recommendation',
-        path: '/analysis',
       },
     ],
   },
@@ -48,11 +49,6 @@ const items = [
     label: 'User profile and settings',
     icon: <AppstoreOutlined />,
     children: [
-      {
-        key: 'profile',
-        label: 'Profile',
-        path: '/profile',
-      },
       {
         key: 'account',
         label: 'Account',
@@ -74,13 +70,8 @@ const items = [
 ];
 
 const Sidebar = () => {
-  const [theme, setTheme] = useState('dark');
   const [current, setCurrent] = useState('incomes');
-  const location = useLocation();
-
-  const changeTheme = (value) => {
-    setTheme(value ? 'dark' : 'light');
-  };
+  // const location = useLocation();
 
   const onClick = (e) => {
     console.log('click ', e);
@@ -98,15 +89,9 @@ const Sidebar = () => {
   return (
     <div style={{ width: 256, display: 'flex', flexDirection: 'column' }}>
       <div style={{ padding: '16px', borderBottom: '1px solid #ddd' }}>
-        <Switch
-          checked={theme === 'dark'}
-          onChange={changeTheme}
-          checkedChildren="Dark"
-          unCheckedChildren="Light"
-        />
+        {/* Removed the Switch component */}
       </div>
       <Menu
-        theme={theme}
         onClick={onClick}
         style={{ flexGrow: 1 }}
         defaultOpenKeys={['sub1']}

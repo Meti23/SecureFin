@@ -1,0 +1,56 @@
+/* General account container styling with shadow */
+.account {
+    padding: 20px;
+    background-color: #f4f4f9; /* Light background color for the whole section */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow around the account container */
+    border-radius: 8px; /* Optional: Add rounded corners to the container */
+    margin: 20px; /* Optional: Add margin to create space around the container */
+  }
+  
+  /* Flex container for the columns */
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between columns */
+    margin: 0 auto; /* Center the container */
+    max-width: 1200px; /* Optional: max width for the container */
+    justify-content: space-between; /* Space out the columns evenly */
+  }
+  
+  /* Column A styling for ProfileCard */
+  .columnA {
+    flex: 1; /* Allows it to grow and shrink equally */
+    min-width: 300px; /* Minimum width for smaller screens */
+    padding: 10px;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+  }
+  
+  /* Column B styling for ManagementCard and DangerZone */
+  .columnB {
+    flex: 2; /* Takes up more space compared to columnA */
+    min-width: 300px; /* Minimum width for smaller screens */
+    padding: 10px;
+  }
+  
+  /* Card styling */
+  .card {
+    background-color: #fff; /* White background for cards */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px;
+  }
+  
+  /* Responsive design: stack columns on smaller screens */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column; /* Stack columns vertically */
+    }
+  
+    .columnA,
+    .columnB {
+      width: 100%; /* Full width for each column */
+      padding: 0;
+    }
+  }
+  

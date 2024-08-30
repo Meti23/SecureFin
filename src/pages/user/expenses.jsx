@@ -3,7 +3,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table, Typography } from 'antd';
 import Highlighter from 'react-highlight-words';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const initialData = [
   {
@@ -151,7 +151,7 @@ const Expenses = () => {
 
   const columns = [
     {
-      title: 'Income name',
+      title: 'Expense Name',
       dataIndex: 'name',
       key: 'name',
       width: '30%',
@@ -159,28 +159,12 @@ const Expenses = () => {
       ...getColumnSearchProps('name'),
     },
     {
-      title: 'Income Type',
-      dataIndex: 'incomeType',
-      key: 'incomeType',
-      filters: [
-        {
-          text: 'Variable Income',
-          value: 'variable',
-        },
-        {
-          text: 'Constant Income',
-          value: 'constant',
-        },
-      ],
-      onFilter: (value, record) => record.incomeType.includes(value),
-      width: '20%',
-    },
-    {
       title: 'Amount',
       dataIndex: 'amount',
       key: 'amount',
       width: '20%',
       ...getColumnSearchProps('amount'),
+      render: (text) => <Text>${text}</Text>,
     },
     {
       title: 'Month',
@@ -192,9 +176,7 @@ const Expenses = () => {
     },
   ];
 
-  const totalAmount = data.reduce((sum, record) => sum + record.amount, 0);
-
-  const handleAdd = () => {
+  const handleAdd = (category) => {
     const newData = {
       key: count.toString(),
       name: { first: 'New', last: `Entry ${count}` },
@@ -206,163 +188,52 @@ const Expenses = () => {
     setCount(count + 1);
   };
 
+  const calculateTotalAmount = (data) => data.reduce((sum, record) => sum + record.amount, 0);
+
+  const renderTable = (title, category) => (
+    <div style={{ marginBottom: '32px' }}>
+      <Title level={3}>{title}</Title>
+      <Button
+        onClick={() => handleAdd(category)}
+        type="primary"
+        style={{
+          marginBottom: 16,
+        }}
+      >
+        Add a row
+      </Button>
+      <Table
+        columns={columns}
+        dataSource={data}
+        summary={() => (
+          <Table.Summary.Row>
+            <Table.Summary.Cell>Total</Table.Summary.Cell>
+            <Table.Summary.Cell colSpan={2} />
+            <Table.Summary.Cell>
+              <Text strong>${calculateTotalAmount(data)}</Text>
+            </Table.Summary.Cell>
+            <Table.Summary.Cell />
+          </Table.Summary.Row>
+        )}
+        pagination={false}
+        bordered
+        style={{
+          borderRadius: '8px',
+          overflow: 'hidden',
+        }}
+      />
+    </div>
+  );
+
   return (
-    <div >
-    
-        <Title style={{ textAlign: 'center', padding: '20px' }}>Expense Tracker</Title>
-
-        {/* Utility Bills */}
-      <div>
-        <Title level={3}>Utility Bills</Title>
-      <Button
-        onClick={handleAdd}
-        type="primary"
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        Add a row
-      </Button>
-      <Table
-        columns={columns}
-        dataSource={data}
-        summary={() => (
-          <Table.Summary.Row>
-            <Table.Summary.Cell>Total</Table.Summary.Cell>
-            <Table.Summary.Cell colSpan={2} />
-            <Table.Summary.Cell>{totalAmount}</Table.Summary.Cell>
-            <Table.Summary.Cell />
-          </Table.Summary.Row>
-        )}
-      />
-      </div>
-        {/* Transport Expense */}
-      <div>
-        <Title level={3}>Transport Expenses</Title>
-      <Button
-        onClick={handleAdd}
-        type="primary"
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        Add a row
-      </Button>
-      <Table
-        columns={columns}
-        dataSource={data}
-        summary={() => (
-          <Table.Summary.Row>
-            <Table.Summary.Cell>Total</Table.Summary.Cell>
-            <Table.Summary.Cell colSpan={2} />
-            <Table.Summary.Cell>{totalAmount}</Table.Summary.Cell>
-            <Table.Summary.Cell />
-          </Table.Summary.Row>
-        )}
-      />
-      </div>
-
-        {/* Grocery */}
-        <div>
-        <Title level={3}>Grocery shopping</Title>
-      <Button
-        onClick={handleAdd}
-        type="primary"
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        Add a row
-      </Button>
-      <Table
-        columns={columns}
-        dataSource={data}
-        summary={() => (
-          <Table.Summary.Row>
-            <Table.Summary.Cell>Total</Table.Summary.Cell>
-            <Table.Summary.Cell colSpan={2} />
-            <Table.Summary.Cell>{totalAmount}</Table.Summary.Cell>
-            <Table.Summary.Cell />
-          </Table.Summary.Row>
-        )}
-      />
-      </div>
-        {/* Personal items */}
-        <div>
-        <Title level={3}>Utility Bills</Title>
-      <Button
-        onClick={handleAdd}
-        type="primary"
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        Add a row
-      </Button>
-      <Table
-        columns={columns}
-        dataSource={data}
-        summary={() => (
-          <Table.Summary.Row>
-            <Table.Summary.Cell>Total</Table.Summary.Cell>
-            <Table.Summary.Cell colSpan={2} />
-            <Table.Summary.Cell>{totalAmount}</Table.Summary.Cell>
-            <Table.Summary.Cell />
-          </Table.Summary.Row>
-        )}
-      />
-      </div>
-        {/* Loan */}
-        <div>
-        <Title level={3}>Loan</Title>
-      <Button
-        onClick={handleAdd}
-        type="primary"
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        Add a row
-      </Button>
-      <Table
-        columns={columns}
-        dataSource={data}
-        summary={() => (
-          <Table.Summary.Row>
-            <Table.Summary.Cell>Total</Table.Summary.Cell>
-            <Table.Summary.Cell colSpan={2} />
-            <Table.Summary.Cell>{totalAmount}</Table.Summary.Cell>
-            <Table.Summary.Cell />
-          </Table.Summary.Row>
-        )}
-      />
-      </div>
-        {/* Others */}
-        <div>
-        <Title level={3}>Others</Title>
-      <Button
-        onClick={handleAdd}
-        type="primary"
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        Add a row
-      </Button>
-      <Table
-        columns={columns}
-        dataSource={data}
-        summary={() => (
-          <Table.Summary.Row>
-            <Table.Summary.Cell>Total</Table.Summary.Cell>
-            <Table.Summary.Cell colSpan={2} />
-            <Table.Summary.Cell>{totalAmount}</Table.Summary.Cell>
-            <Table.Summary.Cell />
-          </Table.Summary.Row>
-        )}
-      />
-      </div>
-
+    <div style={{ padding: '20px' }}>
+      <Title style={{ textAlign: 'center', marginBottom: '32px' }}>Expense Tracker</Title>
+      {renderTable('Utility Bills')}
+      {renderTable('Transport Expenses')}
+      {renderTable('Grocery Shopping')}
+      {renderTable('Personal Items')}
+      {renderTable('Loan')}
+      {renderTable('Others')}
     </div>
   );
 };
